@@ -8,7 +8,9 @@ builder.Services.AddSwaggerGen();
 
 // End points
 builder.Services.AddStudentEndpoints();
-
+builder.Services.AddProfesorEndpoints();
+builder.Services.AddBookEndpoints();
+builder.Services.AddProjectEndpoints();
 
 var app = builder.Build();
 
@@ -17,4 +19,7 @@ app.UseSwaggerUI();
 
 
 app.UseStudentEndpoints();
+app.UseProfesorEndpoints();
+app.UseBookEndpoints();
+app.UseProjectEndpoints();
 app.Run();
