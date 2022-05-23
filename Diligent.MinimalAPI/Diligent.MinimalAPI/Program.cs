@@ -6,11 +6,13 @@ builder.Services.AddSingleton<FacultyContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// End points
+// Endpoints
 builder.Services.AddStudentEndpoints();
 builder.Services.AddProfesorEndpoints();
 builder.Services.AddBookEndpoints();
 builder.Services.AddProjectEndpoints();
+builder.Services.AddCourseEndpoints();
+builder.Services.AddClassroomEndpoints();
 
 var app = builder.Build();
 
@@ -22,4 +24,7 @@ app.UseStudentEndpoints();
 app.UseProfesorEndpoints();
 app.UseBookEndpoints();
 app.UseProjectEndpoints();
+app.UseCourseEndpoints();
+app.UseClassroomEndpoints();
+
 app.Run();
