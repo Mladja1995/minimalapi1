@@ -6,6 +6,12 @@ namespace Diligent.MinimalAPI.Database
     public class FacultyContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
+        public DbSet<Profesor> Profesors { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
+
 
         public string DbPath { get; }
 

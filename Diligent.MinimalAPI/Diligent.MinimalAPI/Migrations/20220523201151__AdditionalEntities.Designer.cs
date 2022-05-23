@@ -3,6 +3,7 @@ using System;
 using Diligent.MinimalAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Diligent.MinimalAPI.Migrations
 {
     [DbContext(typeof(FacultyContext))]
-    partial class FacultyContextModelSnapshot : ModelSnapshot
+    [Migration("20220523201151__AdditionalEntities")]
+    partial class _AdditionalEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -23,15 +25,7 @@ namespace Diligent.MinimalAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ISBN")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("PageNumber")
@@ -47,66 +41,6 @@ namespace Diligent.MinimalAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("Diligent.MinimalAPI.Models.Classroom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Floor")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Identifier")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("NumberOfSeats")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Section")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Classrooms");
-                });
-
-            modelBuilder.Entity("Diligent.MinimalAPI.Models.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Semestar")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Diligent.MinimalAPI.Models.Profesor", b =>
@@ -149,10 +83,6 @@ namespace Diligent.MinimalAPI.Migrations
                     b.Property<int>("ProfesorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProjectDescription")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ProjectName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -162,10 +92,6 @@ namespace Diligent.MinimalAPI.Migrations
 
                     b.Property<int>("StudentId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Technology")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
