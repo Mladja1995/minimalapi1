@@ -18,7 +18,7 @@ namespace Diligent.MinimalAPI.Endpoints
         public static void UseClassroomEndpoints(
             this IEndpointRouteBuilder app)
         {
-            //app.MapGet("/", () => "Hello World!");
+           // app.MapGet("/", () => "Hello World!");
         }
     }
 }
