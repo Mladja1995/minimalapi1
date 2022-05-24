@@ -6,6 +6,9 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class CourseEndpoints
     {
+        private const string Tag = "Course";
+        private const string BaseRoute = "course";
+
         // Extentions methods:
         // Services DI
         public static void AddCourseEndpoints(
@@ -19,10 +22,10 @@ namespace Diligent.MinimalAPI.Endpoints
         public static void UseCourseEndpoints(
             this IEndpointRouteBuilder app)
         {
-            app.MapPost("courses/create-course", (Course course, ICourseService courseService) =>
+            app.MapPost($"{BaseRoute}/create-course", (Course course, ICourseService courseService) =>
             {
                 return Results.Ok(courseService.CreateCourse(course));
-            });
+            }).WithTags(Tag);
 
             //app.MapGet("/", () => "Hello World!");
         }
