@@ -1,4 +1,5 @@
 ﻿using Diligent.MinimalAPI.Database;
+using Diligent.MinimalAPI.Models;
 using Diligent.MinimalAPI.Services.Interfaces;
 
 namespace Diligent.MinimalAPI.Services
@@ -10,6 +11,13 @@ namespace Diligent.MinimalAPI.Services
         public CourseService(FacultyContext facultyContext)
         {
             _facultyContext = facultyContext;
+        }
+
+        public int CreateCourse(Course course)
+        {
+            _facultyContext.Courses.Add(course);
+            _facultyContext.SaveChanges();
+            return course.Id;
         }
     }
 }

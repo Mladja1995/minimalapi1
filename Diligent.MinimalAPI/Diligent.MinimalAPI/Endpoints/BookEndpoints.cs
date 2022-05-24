@@ -17,7 +17,7 @@ namespace Diligent.MinimalAPI.Endpoints
         public static void UseBookEndpoints(
             this IEndpointRouteBuilder app)
         {
-            app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/", () => "Hello World!");
         }
     }
 }

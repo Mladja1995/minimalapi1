@@ -1,5 +1,6 @@
 ﻿using Diligent.MinimalAPI.Services.Interfaces;
 using Diligent.MinimalAPI.Services;
+using Diligent.MinimalAPI.Models;
 
 namespace Diligent.MinimalAPI.Endpoints
 {
@@ -18,7 +19,12 @@ namespace Diligent.MinimalAPI.Endpoints
         public static void UseCourseEndpoints(
             this IEndpointRouteBuilder app)
         {
-            app.MapGet("/", () => "Hello World!");
+            app.MapPost("courses/create-course", (Course course, ICourseService courseService) =>
+            {
+                return Results.Ok(courseService.CreateCourse(course));
+            });
+
+            //app.MapGet("/", () => "Hello World!");
         }
     }
 }
