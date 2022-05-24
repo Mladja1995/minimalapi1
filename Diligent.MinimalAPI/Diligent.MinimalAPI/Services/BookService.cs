@@ -17,7 +17,6 @@ namespace Diligent.MinimalAPI.Services
             return await _facultyContext.SaveChangesAsync() > 0;
         }
 
-        }
 
         public async Task<bool> DeleteBookAsync(int id)
         {
