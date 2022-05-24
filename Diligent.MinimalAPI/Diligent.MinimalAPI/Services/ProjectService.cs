@@ -13,40 +13,50 @@ namespace Diligent.MinimalAPI.Services
             _facultyContext = facultyContext;
         }
 
-        async Task<Project> GetProjectByName(string projectName)
+        public async Task<bool> CreateProject(Project project)
         {
-            return await _facultyContext.Projects.Where(p => p.ProjectName == projectName).FirstOrDefaultAsync();
-                
+            await _facultyContext.Projects.AddAsync(project);
+            return await _facultyContext.SaveChangesAsync() > 0;
         }
-        async Task<List<Project>> GetAllAsync()
+
+        public async Task<bool> DeleteProjectAsync(int id)
+        {
+            var project = await _facultyContext.Projects.
+                                    Where(x => x.Id == id).SingleOrDefaultAsync();
+
+            if (project is not null)
+                _facultyContext.Projects.Remove(project);
+            return await _facultyContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<List<Project>> GetAllAsync()
         {
             return await _facultyContext.Projects.ToListAsync();
         }
 
-
-        Task<bool> IProjectService.CreateProject(Project project)
+        public async Task<Project> GetProjectByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _facultyContext.Projects.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        Task<List<Project>> IProjectService.GetAllAsync()
+        public async Task<bool> UpdateProjectAsync(Project project)
         {
-            throw new NotImplementedException();
-        }
+            var updateProject = await GetProjectByIdAsync(project.Id);
+            if (updateProject is null)
+                return false;
+            else
+            {
+                updateProject.ProjectDescription = project.ProjectDescription;
+                updateProject.ProjectName = project.ProjectName;
+                updateProject.StartDate = project.StartDate;
+                updateProject.EndDate = project.EndDate;
+                updateProject.ProfesorId = project.ProfesorId;
+                updateProject.StudentId = project.StudentId;    
+                updateProject.CourseId = project.CourseId;
+                updateProject.Technology = project.Technology;
 
-        public Task<Project> GetProjectById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteProject(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Project> UpdateProject(Project project)
-        {
-            throw new NotImplementedException();
+                return await _facultyContext.SaveChangesAsync() > 0;
+            }
         }
     }
 }
