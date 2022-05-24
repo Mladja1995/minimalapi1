@@ -13,8 +13,13 @@ namespace Diligent.MinimalAPI.Services
         }
         public async Task<bool> CreateBook(Book book)
         {
-            await _facultyContext.Books.AddAsync(book);
-            return await _facultyContext.SaveChangesAsync() > 0;
+            if (book == null)
+            {
+                await _facultyContext.Books.AddAsync(book);
+                return await _facultyContext.SaveChangesAsync() > 0;
+            }
+            else return false;
+
         }
 
         public async Task<bool> DeleteBookAsync(int id)
