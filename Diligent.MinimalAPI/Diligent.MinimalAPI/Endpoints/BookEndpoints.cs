@@ -12,7 +12,7 @@ namespace Diligent.MinimalAPI.Endpoints
 
         // Extentions methods:
         // Services DI
-        public static void AddProjectEndpoints(
+        public static void AddBookEndpoints(
             this IServiceCollection services)
         {
             services.AddSingleton<IBookService, BookService>();

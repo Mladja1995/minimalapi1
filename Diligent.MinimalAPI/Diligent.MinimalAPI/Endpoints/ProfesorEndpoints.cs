@@ -12,7 +12,7 @@ namespace Diligent.MinimalAPI.Endpoints
 
         // Extentions methods:
         // Services DI
-        public static void AddProjectEndpoints(
+        public static void AddProfesorEndpoints(
             this IServiceCollection services)
         {
             services.AddSingleton<IProfesorService, ProfesorService>();
@@ -20,7 +20,7 @@ namespace Diligent.MinimalAPI.Endpoints
 
         // Endpoints
 
-        public static void UseProjectEndpoints(
+        public static void UseProfesorEndpoints(
             this IEndpointRouteBuilder app)
         {
             app.MapGet(BaseRoute, GetAllProfesors)
