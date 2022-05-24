@@ -34,13 +34,14 @@ namespace Diligent.MinimalAPI.Endpoints
                 .WithTags(Tag);
 
             app.MapPut($"{BaseRoute}/{{id}}", UpdateStudentAsync)
+                .Produces<bool>(200).Produces<IEnumerable<ValidationFailure>>(400)
                 .WithTags(Tag);
 
         }
 
-        internal static async Task<List<Student>> GetAllStudentsAsync(IStudentService studentService)
+        internal static async Task<IResult> GetAllStudentsAsync(IStudentService studentService)
         {
-            return await studentService.GetAllAsync();
+            return Results.Ok(await studentService.GetAllAsync());
         }
         internal static async Task<IResult> GetStudentByIdAsync(int id, IStudentService studentService)
         {
@@ -56,9 +57,14 @@ namespace Diligent.MinimalAPI.Endpoints
             }
             return Results.Ok(await studentService.CreateStudentAsync(student));
         }
-        internal static async Task<bool> UpdateStudentAsync(Student student, int id, IStudentService studentService)
+        internal static async Task<IResult> UpdateStudentAsync(Student student, int id, IStudentService studentService, IValidator<Student> validator)
         {
-            return await studentService.UpdateStudentAsync(student, id);
+            var validationResult = validator.Validate(student);
+            if (!validationResult.IsValid)
+            {
+                return Results.BadRequest(validationResult.Errors);
+            }
+            return Results.Ok(await studentService.UpdateStudentAsync(student, id));
         }
     }
 }
