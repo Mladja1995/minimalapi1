@@ -7,7 +7,7 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class ProfesorEndpoints
     {
-        private const string Tag = "Profesor";
+        private const string Tag = "Profesors";
         private const string BaseRoute = "profesors";
 
         // Extentions methods:
@@ -26,7 +26,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapGet(BaseRoute, GetAllProfesors)
                  .WithTags(Tag);
 
-            app.MapGet($"{BaseRoute}/{{id}}", GetProfesorById)
+            app.MapGet($"{BaseRoute}/profesor", GetProfesorByName)
                  .WithTags(Tag);
 
             app.MapPost(BaseRoute, CreateProfesor)
@@ -36,7 +36,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapPut(BaseRoute, UpdateProfesor)
                .WithTags(Tag);
 
-            app.MapDelete($"{BaseRoute}/{{id}}", DeleteProfesor)
+            app.MapDelete(BaseRoute, DeleteProfesor)
                 .WithTags(Tag);
         }
 
@@ -45,9 +45,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await profesorService.GetAllAsync();
         }
 
-        internal static async Task<IResult> GetProfesorById(int id, IProfesorService profesorService)
+        internal static async Task<IResult> GetProfesorByName(string firstName, string lastName, IProfesorService profesorService)
         {
-            return Results.Ok(await profesorService.GetProfesorById(id));
+            return Results.Ok(await profesorService.GetProfesorByName(firstName, lastName));
         }
 
         internal static async Task<IResult> CreateProfesor(Profesor profesor, IProfesorService profesorService, IValidator<Profesor> validator)
@@ -65,9 +65,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await profesorService.UpdateProfesorAsync(profesor);
         }
 
-        internal static async Task<bool> DeleteProfesor(int id, IProfesorService profesorService)
+        internal static async Task<bool> DeleteProfesor(string firstName, string lastName, IProfesorService profesorService)
         {
-            return await profesorService.DeleteProfesorAsync(id);
+            return await profesorService.DeleteProfesorAsync(firstName, lastName);
         }
     }
 }

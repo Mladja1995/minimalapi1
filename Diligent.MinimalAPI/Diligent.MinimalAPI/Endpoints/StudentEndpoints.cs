@@ -7,7 +7,7 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class StudentEndpoints
     {
-        private const string Tag = "Student";
+        private const string Tag = "Students";
         private const string BaseRoute = "students";
 
         // Extentions methods:

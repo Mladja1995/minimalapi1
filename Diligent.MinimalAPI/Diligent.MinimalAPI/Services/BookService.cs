@@ -18,10 +18,10 @@ namespace Diligent.MinimalAPI.Services
         }
 
 
-        public async Task<bool> DeleteBookAsync(int id)
+        public async Task<bool> DeleteBookAsync(string title)
         {
             var book = await _facultyContext.Books.
-                                    Where(x => x.Id == id).SingleOrDefaultAsync();
+                                    Where(x => x.Title == title).SingleOrDefaultAsync();
 
             if (book is not null)
                 _facultyContext.Books.Remove(book);
@@ -33,14 +33,14 @@ namespace Diligent.MinimalAPI.Services
             return await _facultyContext.Books.ToListAsync();
         }
 
-        public async Task<Book> GetBookByIdAsync(int id)
+        public async Task<Book> GetBookByTitleAsync(string title)
         {
-            return await _facultyContext.Books.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _facultyContext.Books.Where(x => x.Title == title).FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateBookAsync(Book book)
         {
-            var updateBook = await GetBookByIdAsync(book.Id);
+            var updateBook = await GetBookByTitleAsync(book.Title);
             if (updateBook is null)
                 return false;
             else

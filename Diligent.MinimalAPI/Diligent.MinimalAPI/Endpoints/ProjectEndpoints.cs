@@ -7,7 +7,7 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class ProjectEndpoints
     {
-        private const string Tag = "Project";
+        private const string Tag = "Projects";
         private const string BaseRoute = "projects";
 
         // Extentions methods:
@@ -26,7 +26,7 @@ namespace Diligent.MinimalAPI.Endpoints
            app.MapGet(BaseRoute, GetAllProjects)
                 .WithTags(Tag);
 
-            app.MapGet($"{BaseRoute}/{{id}}", GetProjectById)
+            app.MapGet($"{BaseRoute}/{{name}}", GetProjectByName)
                  .WithTags(Tag);
 
             app.MapPost(BaseRoute, CreateProject)
@@ -36,7 +36,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapPut(BaseRoute, UpdateProject)
                .WithTags(Tag);
 
-            app.MapDelete($"{BaseRoute}/{{id}}", DeleteProject)
+            app.MapDelete($"{BaseRoute}/{{name}}", DeleteProject)
                 .WithTags(Tag);
         }
 
@@ -45,9 +45,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await projectService.GetAllAsync();
         }
 
-        internal static async Task<IResult> GetProjectById(int id, IProjectService projectService)
+        internal static async Task<IResult> GetProjectByName(string name, IProjectService projectService)
         {
-            return Results.Ok(await projectService.GetProjectByIdAsync(id));
+            return Results.Ok(await projectService.GetProjectByNameAsync(name));
         }
 
         internal static async Task<IResult> CreateProject(Project project, IProjectService projectService, IValidator<Project> validator)
@@ -65,9 +65,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await projectService.UpdateProjectAsync(project);
         }
 
-        internal static async Task<bool> DeleteProject(int id, IProjectService projectService)
+        internal static async Task<bool> DeleteProject(string name, IProjectService projectService)
         {
-            return await projectService.DeleteProjectAsync(id);
+            return await projectService.DeleteProjectAsync(name);
         }
     }
 }

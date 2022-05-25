@@ -7,7 +7,7 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class BookEndpoints
     {
-        private const string Tag = "Book";
+        private const string Tag = "Books";
         private const string BaseRoute = "books";
 
         // Extentions methods:
@@ -26,7 +26,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapGet(BaseRoute, GetAllBooks)
                  .WithTags(Tag);
 
-            app.MapGet($"{BaseRoute}/{{id}}", GetBookById)
+            app.MapGet($"{BaseRoute}/{{title}}", GetBookByTitle)
                  .WithTags(Tag);
 
             app.MapPost(BaseRoute, CreateBook)
@@ -36,7 +36,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapPut(BaseRoute, UpdateBook)
                .WithTags(Tag);
 
-            app.MapDelete($"{BaseRoute}/{{id}}", DeleteBook)
+            app.MapDelete($"{BaseRoute}/{{title}}", DeleteBook)
                 .WithTags(Tag);
         }
 
@@ -45,9 +45,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await bookservice.GetAllAsync();
         }
 
-        internal static async Task<IResult> GetBookById(int id, IBookService bookService)
+        internal static async Task<IResult> GetBookByTitle(string title, IBookService bookService)
         {
-            return Results.Ok(await bookService.GetBookByIdAsync(id));
+            return Results.Ok(await bookService.GetBookByTitleAsync(title));
         }
 
         internal static async Task<IResult> CreateBook(Book book, IBookService bookService, IValidator<Book> validator)
@@ -65,9 +65,9 @@ namespace Diligent.MinimalAPI.Endpoints
             return await bookService.UpdateBookAsync(book);
         }
 
-        internal static async Task<bool> DeleteBook(int id, IBookService bookService)
+        internal static async Task<bool> DeleteBook(string title, IBookService bookService)
         {
-            return await bookService.DeleteBookAsync(id);
+            return await bookService.DeleteBookAsync(title);
         }
     }
 }

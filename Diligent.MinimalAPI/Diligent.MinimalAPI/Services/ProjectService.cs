@@ -19,10 +19,10 @@ namespace Diligent.MinimalAPI.Services
             return await _facultyContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteProjectAsync(int id)
+        public async Task<bool> DeleteProjectAsync(string name)
         {
             var project = await _facultyContext.Projects.
-                                    Where(x => x.Id == id).SingleOrDefaultAsync();
+                                    Where(x => x.ProjectName == name).SingleOrDefaultAsync();
 
             if (project is not null)
                 _facultyContext.Projects.Remove(project);
@@ -34,14 +34,14 @@ namespace Diligent.MinimalAPI.Services
             return await _facultyContext.Projects.ToListAsync();
         }
 
-        public async Task<Project> GetProjectByIdAsync(int id)
+        public async Task<Project> GetProjectByNameAsync(string name)
         {
-            return await _facultyContext.Projects.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _facultyContext.Projects.Where(x => x.ProjectName == name).FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateProjectAsync(Project project)
         {
-            var updateProject = await GetProjectByIdAsync(project.Id);
+            var updateProject = await GetProjectByNameAsync(project.ProjectName);
             if (updateProject is null)
                 return false;
             else
