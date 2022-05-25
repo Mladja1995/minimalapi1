@@ -66,6 +66,17 @@ namespace Diligent.MinimalAPI.Database
                 b.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
+            modelBuilder.Entity<Course>(b =>
+            {
+                b.HasKey(e => e.Id);
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<Classroom>(b =>
+            {
+                b.HasKey(e => e.Id);
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
         }
     }
 }

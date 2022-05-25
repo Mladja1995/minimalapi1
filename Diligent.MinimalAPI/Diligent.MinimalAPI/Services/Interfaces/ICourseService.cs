@@ -4,6 +4,10 @@ namespace Diligent.MinimalAPI.Services.Interfaces
 {
     public interface ICourseService
     {
-        int CreateCourse(Course course);
+        Task<bool> CreateAsync(Course course);
+        Task<Course> GetByCodeAsync(string code);
+        Task<List<Course>> GetAllAsync();
+        Task<bool> UpdateAsync(Course course);
+        Task<bool> DeleteAsync(string code);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Diligent.MinimalAPI.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Diligent.MinimalAPI.Models
 {
     public class Classroom
     {
+        [JsonIgnore]
         public int Id { get; set; }
         [Required]
         public string Identifier { get; set; }

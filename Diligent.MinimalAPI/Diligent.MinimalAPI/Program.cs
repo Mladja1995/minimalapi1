@@ -26,7 +26,6 @@ app.UseSwaggerUI(options =>
 
 
 app.UseStudentEndpoints();
-
 app.UseProfesorEndpoints();
 app.UseBookEndpoints();
 app.UseProjectEndpoints();
