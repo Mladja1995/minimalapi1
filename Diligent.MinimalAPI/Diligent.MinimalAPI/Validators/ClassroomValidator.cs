@@ -11,7 +11,7 @@ namespace Diligent.MinimalAPI.Validators
             RuleFor(x => x.NumberOfSeats).NotNull();
             RuleFor(x => x.Floor).NotNull();
             RuleFor(x => x.Section).NotEmpty();
-            RuleFor(x => x.Type).NotNull();
+            RuleFor(x => x.Type).NotEmpty();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Diligent.MinimalAPI.Database;
 using Diligent.MinimalAPI.Models;
 using Diligent.MinimalAPI.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Diligent.MinimalAPI.Services
 {
@@ -13,29 +14,49 @@ namespace Diligent.MinimalAPI.Services
             _facultyContext = facultyContext;
         }
 
-        public Task<bool> CreateAsync(Classroom classroom)
+        public async Task<bool> CreateAsync(Classroom classroom)
         {
-            throw new NotImplementedException();
+            _facultyContext.Classrooms.Add(classroom);
+            return await _facultyContext.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> DeleteAsync(string identifier)
+        public async Task<bool> DeleteAsync(string identifier)
         {
-            throw new NotImplementedException();
+            var existingClassroom = await GetByIdentifierAsync(identifier);
+            if (existingClassroom is null)
+            {
+                return false;
+            }
+
+            _facultyContext.Remove(existingClassroom);
+            return await _facultyContext.SaveChangesAsync() > 0;
         }
 
-        public Task<List<Classroom>> GetAllAsync()
+        public async Task<List<Classroom>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _facultyContext.Classrooms.ToListAsync();
         }
 
-        public Task<Classroom> GetByIdentifierAsync(string identifier)
+        public async Task<Classroom> GetByIdentifierAsync(string identifier)
         {
-            throw new NotImplementedException();
+            return await _facultyContext.Classrooms.Where(x => x.Identifier.Equals(identifier)).FirstOrDefaultAsync();
         }
 
-        public Task<bool> UpdateAsync(Classroom classroom)
+        public async Task<bool> UpdateAsync(Classroom classroom)
         {
-            throw new NotImplementedException();
+            var existingIdentifier = await GetByIdentifierAsync(classroom.Identifier);
+            if (existingIdentifier is null)
+            {
+                return false;
+            }
+
+            existingIdentifier.Section = classroom.Section;
+            existingIdentifier.Identifier = classroom.Identifier;
+            existingIdentifier.Floor = classroom.Floor;
+            existingIdentifier.NumberOfSeats = classroom.NumberOfSeats;
+            existingIdentifier.Type = classroom.Type;
+
+            return await _facultyContext.SaveChangesAsync() > 0;
         }
     }
 }

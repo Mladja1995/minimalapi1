@@ -1,5 +1,4 @@
-﻿using Diligent.MinimalAPI.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Diligent.MinimalAPI.Models
@@ -17,6 +16,6 @@ namespace Diligent.MinimalAPI.Models
         [Required]
         public int NumberOfSeats { get; set; }
         [Required]
-        public ClassroomType Type { get; set; }
+        public string Type { get; set; }
     }
 }
