@@ -5,6 +5,9 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class ClassroomEndpoints
     {
+        private const string Tag = "Classroom";
+        private const string BaseRoute = "classrooms";
+
         // Extentions methods:
         // Services DI
         public static void AddClassroomEndpoints(
@@ -18,7 +21,7 @@ namespace Diligent.MinimalAPI.Endpoints
         public static void UseClassroomEndpoints(
             this IEndpointRouteBuilder app)
         {
-           // app.MapGet("/", () => "Hello World!");
+           
         }
     }
 }
