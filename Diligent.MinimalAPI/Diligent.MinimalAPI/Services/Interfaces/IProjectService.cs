@@ -6,8 +6,8 @@ namespace Diligent.MinimalAPI.Services
     {
         Task<bool> CreateProject(Project project);
         Task<List<Project>> GetAllAsync();
-        Task<Project> GetProjectByIdAsync(int id);
-        Task<bool> DeleteProjectAsync(int id);
+        Task<Project> GetProjectByNameAsync(string name);
+        Task<bool> DeleteProjectAsync(string name);
         Task<bool> UpdateProjectAsync(Project project);
     }
 }

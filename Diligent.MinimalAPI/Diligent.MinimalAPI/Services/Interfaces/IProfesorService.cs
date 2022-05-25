@@ -8,7 +8,7 @@ namespace Diligent.MinimalAPI.Services
         Task<List<Profesor>> GetAllAsync();
         Task<Profesor> GetProfesorById(int id);
         Task<Profesor> GetProfesorByName(string firstName, string lastName);
-        Task<bool> DeleteProfesorAsync(int id);
+        Task<bool> DeleteProfesorAsync(string firstName, string lastName);
         Task<bool> UpdateProfesorAsync(Profesor profesor);
     }
 }

@@ -18,10 +18,10 @@ namespace Diligent.MinimalAPI.Services
             return await _facultyContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteProfesorAsync(int id)
+        public async Task<bool> DeleteProfesorAsync(string firstName, string lastName)
         {
             var profesor = await _facultyContext.Profesors.
-                                  Where(x => x.Id == id).SingleOrDefaultAsync();
+                                  Where(x => x.FirstName == firstName && x.LastName == lastName).SingleOrDefaultAsync();
 
             if (profesor is not null)
                 _facultyContext.Profesors.Remove(profesor);
