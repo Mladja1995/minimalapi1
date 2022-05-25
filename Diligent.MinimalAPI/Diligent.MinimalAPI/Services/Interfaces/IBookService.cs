@@ -4,10 +4,10 @@ namespace Diligent.MinimalAPI.Services
 {
     public interface IBookService
     {
-        Task<bool> CreateBook(Book project);
+        Task<bool> CreateBook(Book book);
         Task<List<Book>> GetAllAsync();
-        Task<Book> GetBookByIdAsync(int id);
-        Task<bool> DeleteBookAsync(int id);
-        Task<bool> UpdateBookAsync(Book project);
+        Task<Book> GetBookByTitleAsync(string title);
+        Task<bool> DeleteBookAsync(string title);
+        Task<bool> UpdateBookAsync(Book book);
     }
 }
