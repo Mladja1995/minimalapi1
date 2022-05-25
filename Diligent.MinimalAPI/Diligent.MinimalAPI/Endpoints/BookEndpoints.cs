@@ -7,8 +7,8 @@ namespace Diligent.MinimalAPI.Endpoints
 {
     public static class BookEndpoints
     {
-        private const string Tag = "Book";
-        private const string BaseRoute = "book";
+        private const string Tag = "Books";
+        private const string BaseRoute = "books";
 
         // Extentions methods:
         // Services DI
