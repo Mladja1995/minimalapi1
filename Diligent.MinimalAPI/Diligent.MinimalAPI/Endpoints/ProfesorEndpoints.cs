@@ -26,7 +26,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapGet(BaseRoute, GetAllProfesors)
                  .WithTags(Tag);
 
-            app.MapGet($"{BaseRoute}", GetProfesorByName)
+            app.MapGet($"{BaseRoute}/profesor", GetProfesorByName)
                  .WithTags(Tag);
 
             app.MapPost(BaseRoute, CreateProfesor)
@@ -36,7 +36,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapPut(BaseRoute, UpdateProfesor)
                .WithTags(Tag);
 
-            app.MapDelete($"{BaseRoute}", DeleteProfesor)
+            app.MapDelete(BaseRoute, DeleteProfesor)
                 .WithTags(Tag);
         }
 

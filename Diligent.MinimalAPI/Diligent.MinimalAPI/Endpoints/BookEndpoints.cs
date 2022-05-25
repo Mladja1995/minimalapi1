@@ -26,7 +26,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapGet(BaseRoute, GetAllBooks)
                  .WithTags(Tag);
 
-            app.MapGet($"{BaseRoute}/{{id}}", GetBookByTitle)
+            app.MapGet($"{BaseRoute}/{{title}}", GetBookByTitle)
                  .WithTags(Tag);
 
             app.MapPost(BaseRoute, CreateBook)
@@ -36,7 +36,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapPut(BaseRoute, UpdateBook)
                .WithTags(Tag);
 
-            app.MapDelete($"{BaseRoute}/{{id}}", DeleteBook)
+            app.MapDelete($"{BaseRoute}/{{title}}", DeleteBook)
                 .WithTags(Tag);
         }
 
