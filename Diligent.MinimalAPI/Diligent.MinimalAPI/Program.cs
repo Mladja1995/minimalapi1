@@ -1,3 +1,4 @@
+using Diligent.MinimalAPI.Auth;
 using Diligent.MinimalAPI.Database;
 using Diligent.MinimalAPI.Endpoints;
 using FluentValidation;
@@ -14,6 +15,9 @@ builder.Services.AddProjectEndpoints();
 builder.Services.AddCourseEndpoints();
 builder.Services.AddClassroomEndpoints();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddAuthentication(ApiKeySchemeConstants.SchemeName)
+    .AddScheme<ApiKeyAuthSchemeOptions, ApiKeyAuthHandler>(ApiKeySchemeConstants.SchemeName, _ => { });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -24,6 +28,7 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
+app.UseAuthorization();
 
 app.UseStudentEndpoints();
 app.UseProfesorEndpoints();

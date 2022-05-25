@@ -2,6 +2,8 @@
 using Diligent.MinimalAPI.Services;
 using Diligent.MinimalAPI.Models;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
+using Diligent.MinimalAPI.Auth;
 
 namespace Diligent.MinimalAPI.Endpoints
 {
@@ -30,7 +32,7 @@ namespace Diligent.MinimalAPI.Endpoints
             app.MapDelete($"{BaseRoute}/{{code}}", DeleteCourseAsync).WithTags(Tag);
         }
 
-
+        
         private static async Task<IResult> CreateCourseAsync(Course course, ICourseService courseService, ILogger<Program> logger, IValidator<Course> validator)
         {
             try
@@ -59,6 +61,7 @@ namespace Diligent.MinimalAPI.Endpoints
             }
         }
 
+        [Authorize(AuthenticationSchemes = ApiKeySchemeConstants.SchemeName)]
         private static async Task<IResult> GetCoursesAsync(ICourseService courseService, ILogger<Program> logger)
         {
             try
